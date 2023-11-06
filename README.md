@@ -2,6 +2,9 @@
 ## About 📖
 ## Installation & Setup ⚙️
 ### Django
+> [!NOTE]
+> Please ensure you have an up-to-date version of Python, Pip, and pipenv installed and setup prior to this project initialization
+> A guide to installation and setup can be found: https://www.pythontutorial.net/python-basics/install-pipenv-windows/
 1. Move into the directory for the Django server 
     ``` 
     cd ddflo_server 
@@ -19,6 +22,12 @@
     python manage.py runserver 
     ``` 
 ### Vue
+>[!NOTE]
+> Please ensure you have an up-to-date version of Node, npm, and Vue installed
+> Vue can be installed using the npm
+```
+npm install -g @vue/cli
+```
 1. Move into the directory for the Vue server
     ``` 
     cd ddflo_client
@@ -30,5 +39,5 @@
 3. Run the server
     ```
     npm run dev
-    ``
+    ```
 ## Contributions 💪
