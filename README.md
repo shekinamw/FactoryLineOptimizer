@@ -23,11 +23,7 @@
     ``` 
 ### Vue
 >[!NOTE]
-> Please ensure you have an up-to-date version of Node, npm, and Vue installed
-> Vue can be installed using the npm
-```
-npm install -g @vue/cli
-```
+> Please ensure you have an up-to-date version of Node and npm installed
 1. Move into the directory for the Vue server
     ``` 
     cd ddflo_client
