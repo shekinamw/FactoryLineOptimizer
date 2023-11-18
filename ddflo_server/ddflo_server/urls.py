@@ -19,5 +19,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ddflo.urls'))
+    path('', include('ddflo.urls')),
+    # path('', include('ddflo_factory_management_utility.urls')),
+    # path('', include('ddflo_optimizer.urls')),
+    # path('', include('ddflo_scheduler.urls')),
+    # path('', include('ddflo_sensor_data_utility.urls')),
+    # path('', include('ddflo_simulated_sensor_data_factory.urls'))
 ]

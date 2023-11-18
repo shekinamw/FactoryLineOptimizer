@@ -7,9 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-ddflo_server/ddflo/__pycache__
-ddflo_server/ddflo_server/__pycache__
-ddflo_server/ddflo/migrations
+**/__pycache__/
+ddflo_server/**/migrations
 ddflo_server/ddflo_server/.env
 node_modules
 .DS_Store
