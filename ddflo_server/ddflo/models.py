@@ -6,19 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
-class Factory (models.Model):
-    REAL = 'Real'
-    SIMULATED = 'Simulated'
-    FACTORY_TYPE_CHOICES = [
-        (REAL, 'Real'),
-        (SIMULATED, 'Simulated')
-    ]
-    factory_id = models.BigIntegerField(primary_key=True),
-    factory_location = models.CharField(max_length=255, blank=False, null=False),
-    factory_type =  models.CharField(max_length=255, choices=FACTORY_TYPE_CHOICES, default=SIMULATED)
-    class Meta:
-        db_table = 'factory'
+from ddflo_factory_management_utility.models import Factory
 
 class Availability(models.Model):
     employeeid = models.OneToOneField('Employee', models.CASCADE, db_column='EmployeeID', blank=True, null=True)  # Field name made lowercase.
