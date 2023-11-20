@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import environ 
 
-env=environ.Env()
+import environ
+
+# Initialise environment variables
+env = environ.Env()
 environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ddflo',
-    'ddflo_server',
+    'ddflo_factory_management_utility'
+
 ]
 
 MIDDLEWARE = [
@@ -88,15 +91,13 @@ WSGI_APPLICATION = 'ddflo_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':env('NAME'),
-        'USER':env('USER') ,
-        'HOST': env('HOST') ,
-        'PORT': env('PORT'),
-        'PASSWORD' : env("PASSWORD")
-
+        'NAME': env('DATABASE_NAME'),
+        'USER' : env('DATABASE_USER'),
+        'HOST' : env('DATABASE_HOST'),
+        'PORT' : env('DATABASE_PORT'),
+        'PASSWORD' : env('DATABASE_PASS')
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

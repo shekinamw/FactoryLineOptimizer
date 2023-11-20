@@ -14,18 +14,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.conf import settings
-
 from django.conf.urls.static import static
-
-# ddflo_server/urls.py
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-   path('', include('ddflo.urls')),  
+    path('', include('ddflo.urls')),
+    path('', include('ddflo_factory_management_utility.urls')),
+    # path('', include('ddflo_optimizer.urls')),
+    # path('', include('ddflo_scheduler.urls')),
+    # path('', include('ddflo_sensor_data_utility.urls')),
+    # path('', include('ddflo_simulated_sensor_data_factory.urls'))
 ]
 
 

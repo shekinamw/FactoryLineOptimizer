@@ -23,7 +23,3 @@ def calendar_view(request):
     # ...
     return render(request, 'ddflo/calendar_view.html')
 
-
-
-
-

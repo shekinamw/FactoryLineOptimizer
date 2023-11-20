@@ -15,4 +15,3 @@ urlpatterns = [
     path("schedule/" , views.schedule_list, name="schedule_list")
     
 ]
-
