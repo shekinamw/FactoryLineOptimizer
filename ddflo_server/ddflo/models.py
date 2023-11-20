@@ -51,7 +51,6 @@ class Performance(models.Model):
 class Workstation(models.Model):
     workstationid = models.IntegerField(db_column='WorkstationID', primary_key=True)  # Field name made lowercase.
     workstationname = models.CharField(db_column='WorkstationName', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    factory_id = models.ForeignKey(Factory, models.RESTRICT)
 
     class Meta:
         db_table = 'workstation'
@@ -73,3 +72,13 @@ class Schedule(models.Model):
     class Meta:
         db_table = 'schedule'
         unique_together = (('workstationid', 'employeeid', 'starttime'),)
+
+class Sensordata(models.Model):
+    sensorid = models.IntegerField(db_column='SensorID', primary_key=True)  # Field name made lowercase.
+    taskid = models.ForeignKey(Wstask, models.CASCADE, db_column='TaskID', blank=True, null=True)  # Field name made lowercase.
+    startdatetime = models.DateTimeField(db_column='StartDateTime', blank=True, null=True)  # Field name made lowercase.
+    stopdatetime = models.DateTimeField(db_column='StopDateTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+
+        db_table = 'sensordata'
