@@ -51,7 +51,6 @@ class Performance(models.Model):
 class Workstation(models.Model):
     workstationid = models.IntegerField(db_column='WorkstationID', primary_key=True)  # Field name made lowercase.
     workstationname = models.CharField(db_column='WorkstationName', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    factory_id = models.ForeignKey(Factory, models.RESTRICT)
 
     class Meta:
         db_table = 'workstation'
@@ -82,4 +81,6 @@ class Sensordata(models.Model):
     stopdatetime = models.DateTimeField(db_column='StopDateTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+
         db_table = 'sensordata'
+
