@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 django = "*"
+mysqlclient = "*"
+environ = "*"
+django-environ = "*"
 
 [dev-packages]
 
