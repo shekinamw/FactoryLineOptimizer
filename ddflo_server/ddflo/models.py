@@ -1,4 +1,12 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from ddflo_factory_management_utility.models import Factory
 
 #########################################################################
 #################### Database Models Tables #############################
@@ -60,7 +68,6 @@ class Performance(models.Model):
 class Workstation(models.Model):
     workstationid = models.IntegerField(db_column='WorkstationID', primary_key=True)  # Field name made lowercase.
     workstationname = models.CharField(db_column='WorkstationName', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    factory_id = models.ForeignKey(Factory, models.RESTRICT)
 
     class Meta:
         db_table = 'workstation'
@@ -83,7 +90,6 @@ class Schedule(models.Model):
         db_table = 'schedule'
         unique_together = (('workstationid', 'employeeid', 'starttime'),)
 
-
 class Sensordata(models.Model):
     sensorid = models.IntegerField(db_column='SensorID', primary_key=True)  # Field name made lowercase.
     taskid = models.ForeignKey(Wstask, models.CASCADE, db_column='TaskID', blank=True, null=True)  # Field name made lowercase.
@@ -92,3 +98,4 @@ class Sensordata(models.Model):
 
     class Meta:
         db_table = 'sensordata'
+

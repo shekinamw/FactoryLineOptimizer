@@ -8,6 +8,10 @@ django = "*"
 mysqlclient = "*"
 django-environ = "*"
 
+environ = "*"
+django-environ = "*"
+mysqlclient = "*"
+
 [dev-packages]
 
 [requires]

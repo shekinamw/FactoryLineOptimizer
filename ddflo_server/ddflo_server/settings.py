@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ddflo',
+    'ddflo_factory_management_utility'
+
 ]
 
 MIDDLEWARE = [
@@ -54,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ddflo_server.urls'
+
+
 
 TEMPLATES = [
     {
@@ -71,6 +76,10 @@ TEMPLATES = [
     },
 ]
 
+
+
+
+
 WSGI_APPLICATION = 'ddflo_server.wsgi.application'
 
 
@@ -80,15 +89,13 @@ WSGI_APPLICATION = 'ddflo_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'PASSWORD': env('DB_PASSWORD'),
-        
+        'NAME': env('DATABASE_NAME'),
+        'USER' : env('DATABASE_USER'),
+        'HOST' : env('DATABASE_HOST'),
+        'PORT' : env('DATABASE_PORT'),
+        'PASSWORD' : env('DATABASE_PASS')
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

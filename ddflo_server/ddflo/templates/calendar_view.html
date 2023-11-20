@@ -1,0 +1,89 @@
+<!-- calendar_view.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar View</title>
+    
+    <!-- FullCalendar styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.css" integrity="sha384-xEBkAe6FMzHEVHv3IvHzCzTOj2n6Ecs7FjGLD9R25AChlJLYzAg8lGxu7H6qIv/P" crossorigin="anonymous">
+
+    <!-- Your additional styles -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .days-table {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Schedule</h1>
+    <div id="calendar"></div>
+    <div class="days-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add your table rows here -->
+                <!-- Example: <tr><td>Event 1</td><td>Event 2</td></tr> -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js" integrity="sha384-SJ3cDwrBOa3HpjlkM+0aZzMS9jOX4/48NANLWlXG3C7GtrY4w2bpfMA6Zq8F5czx" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                // Customize calendar options and events source
+                // Example: events: '/api/schedules/'
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html>
