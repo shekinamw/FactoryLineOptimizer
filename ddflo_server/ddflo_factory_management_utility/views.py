@@ -4,14 +4,14 @@ from .models import Factory
 from .forms import FactoryForm
 
 # Create your views here.
-# In the below context 'pass' allows me to define new functions without code within them, using 'pass' prevents an empty function from throwiung an error
+# In the below context 'pass' allows me to define new functions without code within them, using 'pass' prevents an empty function from throwing an error
 
 # Allow Django to render a dashboard for the factory util
 def factory_homepage(request): 
     # Pass a list of factories to the homepage   
     factory_list = fetch_factory_all()
-    #return render(request, 'factory_homepage.html')
-    pass
+    # Need to make this template still
+    return render(request, 'factory_homepage.html')
 
 def factory_error(request):
     #return render(request, 'factory_error.html')

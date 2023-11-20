@@ -73,7 +73,6 @@ class Schedule(models.Model):
         db_table = 'schedule'
         unique_together = (('workstationid', 'employeeid', 'starttime'),)
 
-
 class Sensordata(models.Model):
     sensorid = models.IntegerField(db_column='SensorID', primary_key=True)  # Field name made lowercase.
     taskid = models.ForeignKey(Wstask, models.CASCADE, db_column='TaskID', blank=True, null=True)  # Field name made lowercase.
@@ -83,4 +82,3 @@ class Sensordata(models.Model):
     class Meta:
 
         db_table = 'sensordata'
-
