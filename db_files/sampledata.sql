@@ -1,3 +1,4 @@
+
 INSERT INTO Employee (EmployeeID, GivenName, FamilyName, Age, Email, Phone, JobTitle, Apartment, Street, City, ProvinceState, Country) VALUES
 (1, 'John', 'Doe', 30, 'john.doe@email.com', '+1-123-456-7890', 'Operator', 'Apt 101', '123 Elm St', 'Oshawa', 'ON', 'Canada'),
 (2, 'Jane', 'Smith', 25, 'jane.smith@email.com', '+1-234-567-8901', 'Operator', 'Apt 202', '456 Maple St', 'Oshawa', 'ON', 'Canada'),
