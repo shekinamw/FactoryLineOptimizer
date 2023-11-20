@@ -13,5 +13,4 @@ urlpatterns = [
     #path('calendar/',  views.calendar_view, name='calendar_view'),
     path("", views.home, name="home"),
     path("schedule/" , views.schedule_list, name="schedule_list")
-    
 ]

@@ -8,6 +8,23 @@
 from django.db import models
 from ddflo_factory_management_utility.models import Factory
 
+#########################################################################
+#################### Database Models Tables #############################
+#########################################################################
+
+class Factory (models.Model):
+    REAL = 'Real'
+    SIMULATED = 'Simulated'
+    FACTORY_TYPE_CHOICES = [
+        (REAL, 'Real'),
+        (SIMULATED, 'Simulated')
+    ]
+    factory_id = models.BigIntegerField(primary_key=True),
+    factory_location = models.CharField(max_length=255, blank=False, null=False),
+    factory_type =  models.CharField(max_length=255, choices=FACTORY_TYPE_CHOICES, default=SIMULATED)
+    class Meta:
+        db_table = 'factory'
+
 class Availability(models.Model):
     employeeid = models.OneToOneField('Employee', models.CASCADE, db_column='EmployeeID', blank=True, null=True)  # Field name made lowercase.
     monday = models.IntegerField(db_column='Monday', blank=True, null=True)  # Field name made lowercase.
@@ -76,9 +93,9 @@ class Schedule(models.Model):
 class Sensordata(models.Model):
     sensorid = models.IntegerField(db_column='SensorID', primary_key=True)  # Field name made lowercase.
     taskid = models.ForeignKey(Wstask, models.CASCADE, db_column='TaskID', blank=True, null=True)  # Field name made lowercase.
-    startdatetime = models.DateTimeField(db_column='StartDateTime', blank=True, null=True)  # Field name made lowercase.
+    startdatetime = models.DateTimeField(db_column='StartDateTime', blank=True, null=True)  # Field nagit e made lowercase.
     stopdatetime = models.DateTimeField(db_column='StopDateTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-
         db_table = 'sensordata'
+
