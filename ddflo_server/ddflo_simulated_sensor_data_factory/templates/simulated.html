@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Sensor Data Generator</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center mb-4">Sensor Data Generator</h2>
+
+            <form method="post" action="/generate_data/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="factorySelect">Select Factory</label>
+                    <select class="form-control" id="factorySelect" name="factory">
+                        <option selected disabled >select a factory </option>
+                        {% for factory in factories %}
+                        <option value="{{ factory.factoryname }}"> {{factory.factoryname}} </option>
+                        <!-- dictionary of factories -->
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Generate Sensor Data</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-Y3XKGD9KBSoIwnFqYxV6RkvF4vXlUKia87KR3ccF8Drd13E/UJI1H3zPIdRqOM+L"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

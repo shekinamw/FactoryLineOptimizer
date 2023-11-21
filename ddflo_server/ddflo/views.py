@@ -16,8 +16,6 @@ def home(request):
      return render (request, "base.html")
 
 
-
-
 def calendar_view(request):
     # Your existing calendar view logic
     # ...

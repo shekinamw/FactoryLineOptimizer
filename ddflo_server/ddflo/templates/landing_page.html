@@ -3,6 +3,8 @@
 {% block content %}
 <p> No Schedule Made </p>
 {% endblock %}
+
+
 <form method="post" action="{% url 'landing_page' %}">
     {% csrf_token %}
     {{ form }}

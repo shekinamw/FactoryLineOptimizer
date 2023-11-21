@@ -4,10 +4,7 @@ from datetime import date
 
 # Create your views here.
 
-def sensor_data_util_home(request):
-    # Fetch a list of all sensors
-    # render(request, 'sensor_data_home.html', )
-    pass
+
 
 def sensor_data_logs(request):
     # Fetch all records from today 

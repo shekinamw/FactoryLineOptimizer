@@ -12,6 +12,8 @@ urlpatterns = [
    # path('landing_page/',views.landing_page, name='landing_page'),
     #path('calendar/',  views.calendar_view, name='calendar_view'),
     path("", views.home, name="home"),
-    path("schedule/" , views.schedule_list, name="schedule_list")
+    path("schedule/" , views.schedule_list, name="schedule_list"),
+
     
 ]
+

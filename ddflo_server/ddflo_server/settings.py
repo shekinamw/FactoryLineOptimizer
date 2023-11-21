@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ddflo',
-    'ddflo_factory_management_utility'
+    'ddflo_factory_management_utility',
+    'ddflo_simulated_sensor_data_factory',
 
 ]
 
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'ddflo_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

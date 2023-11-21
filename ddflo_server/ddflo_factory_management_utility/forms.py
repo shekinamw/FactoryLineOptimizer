@@ -5,5 +5,5 @@ from .models import Factory
 class FactoryForm(ModelForm):
     class Meta:
         model = Factory
-        fields = "__all__"
+        fields =  ['factory_location', 'factory_type']
     pass
