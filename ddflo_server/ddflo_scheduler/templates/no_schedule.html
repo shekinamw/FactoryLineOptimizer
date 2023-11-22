@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <title>Schedule Page: {{date}}</title>
+</head>
+<body>
+
+<div class="m-3 d-flex align-items-center">
+    <h1 class="text-left mb-0">Schedule for: {{ date }}</h1>
+
+    <div class="d-flex mx-5">
+        <form method="post" action="{% url 'navigate_date' %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="date" value="{{ date }}">
+            <button type="submit" name="direction" value="backward" class="btn btn-dark">&#60;</button>
+        </form>
+        <form method="post" action="{% url 'navigate_date' %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="date" value="{{ date }}">
+            <button type="submit" name="direction" value="forward" class="btn btn-dark ml-2">&#62;</button>
+        </form>
+    </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center" style="height: 40vh;">
+    <form method="post" action="{% url 'create_schedule' %}" class=" container text-center mt-4">
+        {% csrf_token %}
+        <div class="h1">No Schedule Available</div>
+        <div class="rounded-rectangle border border-secondary p-4">
+            <div class="h4">Generate this week's schedule</div>
+            <input type="hidden" name="date" value="{{ date }}">
+            <button type="submit" class="btn btn-success rounded-circle p-2 mt-3">
+                <span class="h3 p-2">+</span>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

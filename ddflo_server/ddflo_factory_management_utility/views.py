@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.serializers import serialize
-from .models import Factory
+from .models import *
 from .forms import FactoryForm
 
 # Create your views here.
@@ -8,10 +8,11 @@ from .forms import FactoryForm
 
 # Allow Django to render a dashboard for the factory util
 def factory_homepage(request): 
-    # Pass a list of factories to the homepage   
-    factory_list = fetch_factory_all()
+    # Pass a list of factories to the homepage  
+    context = fetch_factory_all()
+
     # Need to make this template still
-    return render(request, 'factory_homepage.html')
+    return render(request, 'factory_homepage.html', context)
 
 def factory_error(request):
     #return render(request, 'factory_error.html')
@@ -55,12 +56,10 @@ def fetch_factory_all():
     factories = Factory.objects.all()
      
      # Serialize the queryset to JSON
-    factory_serialized_data = serialize('json', factories)
+     # Serialize the queryset to JSON
+    factory_serialized_data = serialize('json', factories, fields=('id', 'factory_type', 'factory_status'))
 
-    # Convert the serialized data to a native Dictionary
-    factory_dict_data = {'factories': factory_serialized_data}
-
-    return factory_dict_data
+    return {'factories': factory_serialized_data}
 
 # Allows python to retreive a single factory record, should we do the query based on name?
 # May need to alter this so it works for a search form
@@ -76,20 +75,21 @@ def fetch_factory_single(factory_identifier):
     
     return factory_dict_data
 
-# Allows python to alter a specific factory record, this will need special attention in regards to the effect for the workstations and tasks associated with this factory   
-def alter_factory_single(request):
-
-
-    # Check what field is being altered? Or just overwrite every field by default?
-    # render failure -> go to errors template, pass error info to the html template
-    # render success -> go back to homepage
-    pass
-
 # Allows python to add map workstations from the ddflo DB, workstations table to the factory -> this should stored in a seperate table (maybe called factory_workstation_associations)
 def map_workstations_to_factory():
     # Provide a check for possible conflicting entries (e.g. one factory cannot have multiple of the same workstations?)
     pass
 
+# def fetch_all_workstations():
+# return Workstation.objects.all().values() 
+
+
+def fetch_all_wstasks():
+    return Wstask.objects.all().values()
+
+def get_random_task():
+    return Wstask.objects.order_by('?').first().taskid
+    
 # Allows python to delete a factory and it's associated mapped workstations and tasks
 def delete_factory_single(request, factory_identifier):
     # Delete factory records where factory_id = factory_identifier
@@ -104,3 +104,17 @@ def delete_factory_single(request, factory_identifier):
         template_choice = 'error_page.html'
     
     return render(request, template_choice)
+
+def fetch_workstation_based_on_task(task_id):
+    return Wstask.objects.filter(taskid=task_id).values('workstationid')
+
+def fetch_factory_status(factoryid):
+    return 
+
+def alter_factory_status(factoryid):
+    if fetch_factory_status(factoryid):
+        Factory.objects.filter(factory_id=factoryid).update(factorystatus=False)
+    else:
+        Factory.objects.filter(factory_id=factoryid).update(factorystatus=True)
+        sensor_data_generator(factory_id)
+    

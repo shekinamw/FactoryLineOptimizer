@@ -43,7 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ddflo',
-    'ddflo_factory_management_utility'
+    'ddflo_employee_utility',
+    'ddflo_factory_management_utility',
+    'ddflo_optimizer',
+    'ddflo_scheduler',
+    'ddflo_sensor_data_utility',
+    'ddflo_simulated_sensor_data_factory',
+    'performance_score_calculator'
 ]
 
 MIDDLEWARE = [

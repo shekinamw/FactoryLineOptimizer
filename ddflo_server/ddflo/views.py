@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Workstation
+from ddflo_factory_management_utility.models import Workstation
 
 #new stuff
 # Create your views here.
