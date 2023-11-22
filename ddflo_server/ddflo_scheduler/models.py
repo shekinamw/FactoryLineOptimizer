@@ -25,10 +25,9 @@ class ShiftGroup(models.Model):
 
 class Schedule(models.Model):
     surrogate_id = models.AutoField(primary_key=True, default=1)
-    workstationid = models.OneToOneField('ddflo_factory_management_utility.Workstation', models.RESTRICT, db_column='WorkstationID')
+    workstationid = models.ForeignKey('ddflo_factory_management_utility.Workstation', models.RESTRICT, db_column='WorkstationID')
     employeeid = models.ForeignKey('ddflo_employee_utility.Employee', on_delete=models.PROTECT, db_column='EmployeeID')
     shift_date = models.DateField(db_column='ShiftDate')
 
     class Meta:
         db_table = 'schedule'
-        unique_together = (('workstationid', 'employeeid', 'shift_date'))

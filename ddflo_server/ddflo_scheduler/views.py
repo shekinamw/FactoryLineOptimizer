@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse 
 from .models import *
+from ddflo.models import *
 from performance_score_calculator.views import *
 from ddflo_employee_utility.views import * 
 #from ddflo_optimizer.views import generate_optimized_schedule
@@ -49,7 +50,7 @@ def schedule_home(request, date):
         for shift in shift_structure:
             placeholder = fetch_employee_shiftgroup(map_shiftname_to_groupnumber(shift['shiftname']))
             context[shift['shiftname']] = placeholder
-
+        
         return render(request, 'schedule_home.html', context)
     else:
         context = {'date': date}

@@ -1,43 +1,44 @@
-{% extends "Homepage.html" %} 
+{% extends "_base.html" %} 
 
 {% block content %}
 <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<div class="m-3">
-  <form method="post" action="{% url 'navigate_date' %}" style="display: inline;">
-      {% csrf_token %}
-      <input type="hidden" name="date" value="{{ date }}">
-      <button type="submit" name="direction" value="backward" class="btn btn-dark">&#60;</button>
-  </form>
 
-  <form method="post" action="{% url 'navigate_date' %}" style="display: inline;">
-      {% csrf_token %}
-      <input type="hidden" name="date" value="{{ date }}">
-      <button type="submit" name="direction" value="forward" class="btn btn-dark">&#62;</button>
-  </form>
+<div class="m-3 d-flex align-items-center">
+    <h1 class="text-left mb-0">Schedule for: {{ date }}</h1>
+
+    <div class="d-flex mx-5">
+        <form method="post" action="{% url 'navigate_date' %}" style="display: inline;">
+            {% csrf_token %}    
+            <input type="hidden" name="date" value="{{ date }}">
+            <button type="submit" name="direction" value="backward" class="btn btn-dark">&#60;</button>
+        </form>
+        <form method="post" action="{% url 'navigate_date' %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="date" value="{{ date }}">
+            <button type="submit" name="direction" value="forward" class="btn btn-dark ml-2">&#62;</button>
+        </form>
+    </div>
 </div>
 
 <div class="container">
-    <h1>Schedule for {{ date }}</h1>
     {% for shift in shift_structure %}
     <p class="border-bottom"> {{shift.shiftname}} Shift ({{shift.start_time}} to {{shift.end_time}}) </p>
     <table>
         <thead>
             <tr>
-                <th>Workstation</th>
-                <th>Employee</th>
-                <th>Shift Date</th>
+                <th class="px-3">Workstation</th>
+                <th class="px-3">Employee</th>
             </tr>
         </thead>
         <tbody>
             {% for entry in schedule_entries %}
-                {% if entry.shift_date == }
                 <tr>
-                    <td>{{ entry.workstationid }}</td>
-                    <td>{{ entry.employeeid }}</td>
-                    <td>{{ entry.shift_date }}</td>
+                    <td class="px-3">{{ entry.workstationid_id }}</td>
+                    <td class="px-3">{{ entry.employeeid_id }}</td>
                 </tr>
             {% endfor %}
         </tbody>

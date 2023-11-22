@@ -23,9 +23,10 @@ def generate_one_halt_event(task):
 
 # Takes in a boolean value, 
 def sensor_data_generator(status, task): # runs the loop, continues untill the factory is turned off
-    while status:
-        delay = randint(100, 3600)
-        time.sleep(delay)
-        if status:
-            break
-        generate_one_halt_event(task)
+    generate_one_halt_event(task)
+    #while status:
+        # delay = randint(100, 3600)
+        # time.sleep(delay)
+        # if status:
+        #     break
+        # generate_one_halt_event(task)

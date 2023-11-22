@@ -5,6 +5,7 @@ from .models import *
 from .forms import FactoryForm
 from ddflo_simulated_sensor_data_factory.views import sensor_data_generator
 from threading import Thread
+
 # Create your views here.
 # In the below context 'pass' allows me to define new functions without code within them, using 'pass' prevents an empty function from throwing an error
 
@@ -62,7 +63,7 @@ def fetch_all_wstasks():
     return Wstask.objects.all().values()
 
 def get_random_task():
-    return Wstask.objects.order_by('?').first().taskid
+    return Wstask.objects.order_by('?').first()
     
 def fetch_workstation_based_on_task(task_id):
     return Wstask.objects.filter(taskid=task_id).values('workstationid')
