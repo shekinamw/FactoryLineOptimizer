@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse 
 from .models import *
-from performance_score_calculator import views
+from performance_score_calculator.views import *
 from ddflo_employee_utility.views import * 
+#from ddflo_optimizer.views import generate_optimized_schedule
 from django.db.models import F
 # from ddflo_optimizer.views import function_I_want_to_use (<< that's a placeholder)
 # from ddflo_employee_utility.views import 
@@ -37,18 +38,19 @@ class DateConverter:
 Schedule_home is complete
 '''
 def schedule_home(request, date):
-    # Paramter date taken from 
+    # Parameter date taken from 
     get_schedule = fetch_schedule(date)
-    json_date = {'date' : date}
+    json_date = {'date': date}
     
     if get_schedule.exists():
         shift_structure = fetch_shift_structure()
-        context = {'shift_structure': shift_structure, 'date': date}
+        context = {'shift_structure': shift_structure, 'date': date, 'schedule_entries': get_schedule}
 
         for shift in shift_structure:
             placeholder = fetch_employee_shiftgroup(map_shiftname_to_groupnumber(shift['shiftname']))
             context[shift['shiftname']] = placeholder
-        return render(request, 'schedule_home.html', get_schedule, context)
+
+        return render(request, 'schedule_home.html', context)
     else:
         context = {'date': date}
         return render(request, 'no_schedule.html', context)
@@ -90,7 +92,7 @@ fetch_schedule is complete
 
 def fetch_employee_based_on_station_and_date(workstation, date):
     #Getting the shiftname from the shifts table that is within the range of date (date is in time format)
-    shift_number_in_halt_time = Shifts.objects.filter(start_time__gte=date.strftime('%H:%M:%S'), end_time__lte=date.strftime('%H:%M:%S')).values('shiftname')
+    shift_number_in_halt_time = Shift.objects.filter(start_time__gte=date.strftime('%H:%M:%S'), end_time__lte=date.strftime('%H:%M:%S')).values('shiftname')
     # Get employees that work at workstation on halt date (needs)
     return Schedule.objects.filter(workstationid=workstation, shiftdate=date.date(), shiftgroup=shift_number_in_halt_time).values('employeeid')
 
@@ -100,16 +102,6 @@ def fetch_employee_based_on_station_and_date(workstation, date):
 def fetch_schedule(date):
     return Schedule.objects.filter(shift_date=date).values()
 
-# Will take a shift date and generation_type (e.g. automatic, manual) as input
-def create_schedule(request): #generation_type):
-    generation_startdate = DateConverter().to_python(request.POST.get('date'))
-    generation_enddate = generation_startdate + timedelta(days=7)
-    
-    if not generate_optimized_schedule(generation_startdate, generation_enddate):
-        # return redirect('/error_page/')
-        pass
-    else:
-        return redirect('schedule_home', date=generation_startdate)
 
 '''
 map_shiftname_top_groupnumber is complete
@@ -153,3 +145,79 @@ def  get_shift_start_end(employee_id, shift_date):
 
     # Return None if no shift found on the given date
     return None
+
+def generate_daily_schedule(date):
+    # Iterate through a list of workstations
+    workstation_list = Workstation.objects.values_list('workstationid')
+    list_of_elim_employees = []
+    generation_outcome = True
+    schedule_records = []
+    
+    for shift in fetch_shift_structure():
+        # Maps the shiftname to the groupnumber, so we can connect the group number to the employee
+        group_number = map_shiftname_to_groupnumber(shift.shiftname)
+
+        # Gets all the employees available on the start date provided by the user via the scheduler application
+        weekday_format = date.strftime('%A').lower()
+        available_employees = get_available_employees(group_number, weekday_format)
+        
+        # Check if available_employees is empty or not enough for each workstation
+        if not available_employees.exists() or available_employees.count() < workstation_list.count():
+            generation_outcome = False
+            break
+
+        # Get the best employee based on score for each workstation
+        for workstation in workstation_list:
+            # Check if the available_employee is in list_of_elim_employees
+            if available_employees.filter(employee_id__in=list_of_elim_employees).exists():
+                continue  # Move to the next workstation if already processed
+
+            top_employee = fetch_top_employee_for_station(available_employees, workstation)
+            list_of_elim_employees.append(top_employee)
+            
+            # Assuming 'schedule' is your model
+            schedule_record = Schedule(
+                workstationid=workstation,
+                employeeid=top_employee,
+                shift_date=date
+            )
+            schedule_records.append(schedule_record)
+
+    # Execute the creation after completing the main loop
+    if generation_outcome:
+        Schedule.objects.bulk_create(schedule_records)
+        
+    return generation_outcome
+    
+# Returns 1 if successful and 0 otherwise
+def generate_optimized_schedule(start_date, end_date):
+    current_date = start_date
+    optimized_schedule = []
+    generation_outcome = None
+
+    # Iterate through the date range and generate daily schedules
+    while current_date <= end_date:
+        # Call generate for the day
+        if not generate_daily_schedule(current_date):
+            generation_outcome = current_date 
+            break
+        # Move to the next day
+        current_date += timedelta(days=1)
+
+    # Return the optimized schedule for the entire date range
+    return generation_outcome
+
+
+def create_schedule(request):
+    date_str = request.POST.get('date')
+    date_converter = DateConverter()
+    fix_date = date_converter.to_python(date_str)
+    week = fix_date + timedelta(days=7)
+
+    # Check if generation was successful
+    if generate_optimized_schedule(fix_date, week):
+        return redirect('schedule_home', date=week)
+    else:
+        # Handle the case where the generation failed
+        # You might want to display an error message or redirect to an error page
+        return render(request, 'error_page.html', status=500)

@@ -6,7 +6,7 @@ class Employee(models.Model):
     employeeid = models.IntegerField(db_column='EmployeeID', primary_key=True)  # Field name made lowercase.
     givenname = models.CharField(db_column='GivenName', max_length=255, blank=True, null=True)  # Field name made lowercase.
     familyname = models.CharField(db_column='FamilyName', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    shift_group = models.ForeignKey('ddflo_scheduler.ShiftGroup', on_delete=models.PROTECT)
+    shift_group = models.IntegerField(db_column='ShiftGroup', blank=True, null=True)
     age = models.IntegerField(db_column='Age', blank=True, null=True)  # Field name made lowercase.
     email = models.CharField(db_column='Email', max_length=255, blank=True, null=True)  # Field name made lowercase.
     phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)  # Field name made lowercase.

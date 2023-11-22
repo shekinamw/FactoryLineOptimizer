@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "Homepage.html" %} 
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,11 +22,12 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 text-center">
-            <form method="post" action="{% url 'alter_factory_status' %}" id="alterFactoryStatusForm">
+            <h1>Factory Status: {% if factory.factory_status %}Enabled{% else %}Disabled{% endif %}</h1>
+            <form method="post" action="{% url 'toggle' %}">
                 {% csrf_token %}
-                <input type="hidden" name="factory_id" value="{{ factory_id }}">
-                <button type="submit" class="btn btn-primary">For Factory {{ factory.factory_id }} Alter Factory Status</button>
-            </form>
+                <input type="submit" value="Toggle">
+            </form> 
+        
         </div>
     </div>
 </div>
@@ -36,4 +38,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-</html>
+
+{% endblock content %}
