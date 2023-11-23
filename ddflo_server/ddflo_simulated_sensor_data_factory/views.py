@@ -1,4 +1,9 @@
-from django.shortcuts import render
+from datetime import datetime
+from django.shortcuts import render, redirect
+
+from ddflo_sensor_data_utility.views import create_sensor_record
+from random import randint
+import time
 
 # Expected request will carry factory data identifier, and the factory's workstations and sensors
 # Create functions to...
@@ -6,16 +11,22 @@ from django.shortcuts import render
 
 # This home page will serve as a spot for the manager / user to generate new information for a selected simulated factory (these are managed in the factory_management_utility app)
 def simulated_factory_home(request):
-    # return render(request, 'simulated_factory_homepage')
-    pass
-
-def generate_data():
-    # I'll create a dictionary of scenarios and patterns 
-    halt_scenarios = [{'Short' : ''}, {'Medium' : ''}, {'Long' : ''}]
-    # I can use a halt count for a workstation, employee combo and use that to determine and map to a reoccurence multiplier
-    halt_count = {}
-    # Where halt_count retrieves employee id as a key and # halts as the value
-    # Map employee id as key to halt occurences
-    reoccurence_multiplier = {}
+    return render(request, 'simulated-factory-home.html')
     
-    pass
+def generate_one_halt_event(task):
+    duration = randint(10, 100)
+    halt_start = datetime.now()
+    time.sleep(duration)
+    halt_end = datetime.now()
+    create_sensor_record(halt_start, halt_end, task)
+
+
+# Takes in a boolean value, 
+def sensor_data_generator(status, task): # runs the loop, continues untill the factory is turned off
+    generate_one_halt_event(task)
+    #while status:
+        # delay = randint(100, 3600)
+        # time.sleep(delay)
+        # if status:
+        #     break
+        # generate_one_halt_event(task)

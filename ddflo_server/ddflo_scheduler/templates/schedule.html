@@ -1,0 +1,80 @@
+
+{% extends "schedule_home.html" %} 
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+    </style>
+    <title>Schedule for {{ date }}</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Schedule for {{ date }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Workstation</th>
+                <th>Employee</th>
+                <th>Shift Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in schedule_entries %}
+                <tr>
+                    <td>{{ entry.workstationid }}</td>
+                    <td>{{ entry.employeeid }}</td>
+                    <td>{{ entry.shift_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+{% endblock content %}
