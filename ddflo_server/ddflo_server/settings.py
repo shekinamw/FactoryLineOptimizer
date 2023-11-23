@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 
-# Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
 
@@ -64,6 +63,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ddflo_server.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -79,6 +80,10 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+
 
 WSGI_APPLICATION = 'ddflo_server.wsgi.application'
 

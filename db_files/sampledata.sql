@@ -1,3 +1,4 @@
+
 INSERT INTO Employee (EmployeeID, GivenName, FamilyName,shiftgroup, Age, Email, Phone, JobTitle, Apartment, Street, City, ProvinceState, Country) VALUES
 (1, 'John', 'Doe', 30, 1, 'john.doe@email.com', '+1-123-456-7890', 'Operator', 'Apt 101', '123 Elm St', 'Oshawa', 'ON', 'Canada'),
 (2, 'Jane', 'Smith', 25, 1, 'jane.smith@email.com', '+1-234-567-8901', 'Operator', 'Apt 202', '456 Maple St', 'Oshawa', 'ON', 'Canada'),
@@ -44,7 +45,6 @@ INSERT INTO Employee (EmployeeID, GivenName, FamilyName,shiftgroup, Age, Email, 
 (43, 'Sawyer', 'Hardy', 34, 3, 'sawyer.hardy@email.com', '+1-345-678-9012', 'Operator', 'Apt 4343', '567 Cedar St', 'Oshawa', 'ON', 'Canada'),
 (44, 'Amelia', 'Keller', 27, 3, 'amelia.keller@email.com', '+1-456-789-0123', 'Operator', 'Apt 4444', '345 Birch St', 'Oshawa', 'ON', 'Canada'),
 (45, 'Oscar', 'Vaughn', 29, 3, 'oscar.vaughn@email.com', '+1-567-890-1234', 'Operator', 'Apt 4545', '678 Pine St', 'Oshawa', 'ON', 'Canada');
-
 
 INSERT INTO Availability (EmployeeID, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) VALUES
 (1, 1, 1, 0, 0, 1, 0, 0),

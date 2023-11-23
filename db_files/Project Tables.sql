@@ -1,3 +1,4 @@
+
 -- Employee Table
 CREATE TABLE Employee (
   EmployeeID INT PRIMARY KEY,

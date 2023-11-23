@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html kang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta 
+          name="viewport" 
+          content="width= device-width, initial-scale=1, shrink-to-fir=no"
+          />
+
+          <title> {%block title %} Django App {% endblock %} </title>
+          <!--Bootstrap css-->
+          <link 
+             href="https://stackpath.bootstrapchdn.com/bootsrap/4.3.1/css/bootstrap.min.css"
+             rel="stylesheet"
+             />
+    </head>
+<body> 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="nabar-brand" href="#"> DDFLO </a>
+    <button 
+      class="navbar-toggler"
+      type=" button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expands="false"
+      aria-label="Toggle navigation"
+      ><spam class="navbar-toggler-icon">
+      </spam>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        
+          
+            
+    </div>
+    </nav>
+   <div class="container"> {% block content %} {% endblock %} </div>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+   <script src="https://stackpath.bootstapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.css ">
+
+   </script>
+
+</body>
+
+</html>

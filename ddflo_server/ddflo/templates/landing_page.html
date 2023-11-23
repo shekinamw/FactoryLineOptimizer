@@ -1,0 +1,25 @@
+<!-- ddflo/templates/ddflo/landing_page.html -->
+{% extends "base.html" %} {% block title %} Landing page {% endblock %}
+{% block content %}
+<p> No Schedule Made </p>
+{% endblock %}
+<form method="post" action="{% url 'landing_page' %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Add Schedule</button>
+</form>
+
+
+<!-- Display schedules for the selected date -->
+{% if schedules %}
+    <h2>Schedules for the selected date:</h2>
+    <ul>
+        {% for schedule in schedules %}
+            <li>{{ schedule.employeeid.givenname }} {{ schedule.employeeid.familyname }} - {{ schedule.starttime }} to {{ schedule.endtime }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+
