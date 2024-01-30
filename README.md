@@ -1,4 +1,5 @@
-# DataManagementFinalProject: Factory Line Optimizer 🏭
+# Data Driven Factory Line Optimizer (DDFLO) 🏭
+
 ## Installation & Setup ⚙️
 ### Django
 > [!NOTE]
